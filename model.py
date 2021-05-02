@@ -59,7 +59,7 @@ GENERAMOS LA CLASE DEL MODELO
 
 class Model():
 
-    def __init__(self,model_name,df,epochs,verbose=1):
+    def __init__(self,model_name,df,epochs,verbose=1,patience=50):
         self.model_name=model_name
         self._model=None
         self._X_train=None
@@ -71,6 +71,7 @@ class Model():
         self._df=df
         self._epochs=epochs
         self.verbose=verbose
+        self.patience=patience
 
 
     
@@ -357,7 +358,7 @@ class Model():
         )
 
         ## AÑADIMOS DOS CALLBACKS
-        es = EarlyStopping(monitor='val_accuracy', mode='max', verbose=1, patience=40)
+        es = EarlyStopping(monitor='val_accuracy', mode='max', verbose=1, patience=self.patience)
         mc = ModelCheckpoint('best_model_{}.h5'.format(self.model_name), monitor='val_accuracy', mode='max', verbose=1, save_best_only=True)
         callbacks = [tensorboard_callback,es,mc]
         history = model_train.fit(self._X_train, self._y_train, batch_size=64, epochs=self._epochs,verbose=self.verbose,validation_data=(self._X_validation,self._y_validation),callbacks=callbacks)

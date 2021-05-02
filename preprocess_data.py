@@ -95,22 +95,56 @@ def extract_zcr(df):
     return df
 
 ########## SPECTRAL CENTROID
+def get_spectral_centroids(song_name):
+    genre = song_name.split(".")[0]
+    filename = './genres/' + genre + '/' + song_name
+    x,sample_rate = librosa.load(filename)
+    spectral_centroids = librosa.feature.spectral_centroid(x, sr=sample_rate)[0]
+    return np.mean(spectral_centroids)
 
-
+def extract_spectral_centroids(df):
+    df['Spectral_Centroid'] = df['Song'].apply(get_spectral_centroids)
+    return df
 
 ########## SPECTRAL FLATNESS
+def get_spectral_flatness(song_name):
+    genre = song_name.split(".")[0]
+    filename = './genres/' + genre + '/' + song_name
+    x,sample_rate = librosa.load(filename)
+    spectral_flatness = librosa.feature.spectral_flatness(x)[0]
+    return np.mean(spectral_flatness)
 
-
+def spectral_flatness(df):
+    df['Spectral Flatness'] = df['Song'].apply(get_spectral_flatness)
+    return df
 
 ########## SPECTRAL BANDWITH
+def get_spectral_bandwidth(song_name):
+    genre = song_name.split(".")[0]
+    filename = './genres/' + genre + '/' + song_name
+    x,sample_rate = librosa.load(filename)
+    spectral_bandwidth = librosa.feature.spectral_bandwidth(x, sr = sample_rate)[0]
+    return np.mean(spectral_bandwidth)
 
+def spectral_bandwidth(df):
+    df['Spectral Bandwidth'] = df['Song'].apply(get_spectral_bandwidth)
+    return df
 
-########## SPECTRAL ROLLOFF
 
 
 ########## CHROMA VECTOR
 
+def get_chroma_vector(song_name):
+    hop_length = 512 # <---
+    genre = song_name.split(".")[0]
+    filename = './genres/' + genre + '/' + song_name
+    x,sample_rate = librosa.load(filename)
+    chromagram = librosa.feature.chroma_stft(data, sr=sample_rate, hop_length=hop_length)
+    return np.mean(chromagram, axis = 1)
 
+def chroma_vector(df):
+    df['Chroma Vector'] = df['Song'].apply(get_chroma_vector)
+    return df
 
 ########## MEL
 
