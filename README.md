@@ -1,6 +1,8 @@
 # Audio_Classification
-Audio_Classification
-ESTRUCTURA DEL PROYECTO:
+
+## ESTRUCTURA DEL PROYECTO:
+
+
 Nuestro objetivo con este proyecto era tratar de generar varios tipos de modelos para probar las distintas estructuras de cara a la predicción de audio. Las limitaciones con las que nos encontramos son claras dado que contamos con un dataset bastante pequeño y aún más si tenemos en cuenta que se trata de 10 clases distintas.
 Por otro lado, hemos tratado de generar un código que pudiese ser utilizado en un entorno profesional productivo, es por ello que hemos generado una clase amplia que contiene todo lo concerniente al modelo y además se han añadido gran cantidad de logs para luego poder depurar el código en caso de correr el programa en un despliegue fuera del local de nuestro ordenador.
 Por ello, el trabajo consiste de cuatro documentos:
